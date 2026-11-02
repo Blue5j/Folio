@@ -1,0 +1,218 @@
+/* ───────────────────────────────────────────────────────────────────────────
+   Paperr · Waybar
+   The bar is one long torn strip of paper, floating above the bottom edge.
+   The texture and the shadow live in torn-bar.png; everything here is ink.
+   setup.sh replaces @HOME@ with your real home directory.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+* {
+    font-family: "Patrick Hand", "Caveat", "FiraCode Nerd Font", sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: #2c2c2c;
+}
+
+window#waybar {
+    background-color: transparent;
+    background-image: url("@HOME@/.config/waybar/assets/torn-bar.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: #2c2c2c;
+}
+
+window#waybar.hidden {
+    opacity: 0.15;
+}
+
+/* The strip has tape at each end; keep the letters out from under it. */
+.modules-left {
+    margin-left: 34px;
+}
+
+.modules-right {
+    margin-right: 30px;
+}
+
+#custom-paper {
+    font-family: "Caveat", "Patrick Hand", sans-serif;
+    font-size: 23px;
+    font-weight: 600;
+    color: #a64e42;
+    margin: 2px 14px 0 2px;
+    padding: 0 4px;
+    border-bottom: 1px dashed rgba(166, 78, 66, 0.35);
+}
+
+#workspaces {
+    margin: 6px 0;
+    padding: 0 2px;
+}
+
+#workspaces button {
+    min-width: 18px;
+    padding: 1px 9px 2px 9px;
+    margin: 0 1px;
+    color: #6e6458;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 2px 7px 3px 6px;
+    box-shadow: none;
+    transition: background-color 180ms ease, color 180ms ease;
+}
+
+#workspaces button:hover {
+    color: #2c2c2c;
+    background-color: rgba(255, 255, 255, 0.35);
+    border: 1px dashed rgba(44, 44, 44, 0.18);
+}
+
+#workspaces button.active {
+    color: #2c2c2c;
+    background-color: rgba(127, 168, 201, 0.42);
+    border: 1px solid rgba(127, 168, 201, 0.55);
+    border-radius: 3px 6px 2px 7px;
+    box-shadow: inset 0 -2px 0 rgba(127, 168, 201, 0.45);
+}
+
+#workspaces button.urgent {
+    color: #f4f1ea;
+    background-color: rgba(166, 78, 66, 0.82);
+    border-radius: 6px 2px 7px 3px;
+}
+
+#workspaces button.empty {
+    color: rgba(110, 100, 88, 0.55);
+}
+
+#window {
+    font-family: "Caveat", "Patrick Hand", sans-serif;
+    font-size: 20px;
+    color: #5c5348;
+    padding: 0 18px;
+    margin: 3px 0;
+    border-bottom: 1px dashed rgba(92, 83, 72, 0.28);
+}
+
+#tray,
+#pulseaudio,
+#network,
+#battery,
+#clock,
+#custom-trash {
+    margin: 7px 0;
+    padding: 0 11px;
+    border-left: 1px dashed rgba(44, 44, 44, 0.16);
+}
+
+#tray {
+    padding-right: 12px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: rgba(166, 78, 66, 0.16);
+    border-radius: 5px;
+}
+
+#pulseaudio {
+    color: #5f7f95;
+}
+
+#pulseaudio.muted {
+    color: rgba(95, 127, 149, 0.48);
+}
+
+#network {
+    color: #6d8263;
+}
+
+#network.disconnected {
+    color: #a64e42;
+}
+
+#battery {
+    color: #8a7458;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #9a7d3f;
+}
+
+#battery.warning {
+    color: #cc9056;
+}
+
+#battery.critical {
+    color: #a64e42;
+}
+
+#clock {
+    font-family: "Caveat", "Patrick Hand", sans-serif;
+    font-size: 20px;
+    color: #a64e42;
+    padding-left: 13px;
+    padding-right: 13px;
+}
+
+#custom-trash {
+    font-family: "FiraCode Nerd Font";
+    font-size: 19px;
+    color: #766a5c;
+    padding: 0 14px 1px 12px;
+    border-left: 1px dashed rgba(44, 44, 44, 0.16);
+    border-right: 2px solid transparent;
+    border-radius: 0 5px 5px 0;
+}
+
+#custom-trash:hover {
+    color: #a64e42;
+    background-color: rgba(166, 78, 66, 0.10);
+    border-right: 2px solid rgba(166, 78, 66, 0.5);
+}
+
+#custom-trash:active {
+    color: #f4f1ea;
+    background-color: #a64e42;
+}
+
+/* Tooltips look like a smaller scrap of paper. */
+tooltip {
+    background-color: #f4f1ea;
+    border: 2px solid #d8cbb6;
+    border-radius: 4px 8px 3px 7px;
+    box-shadow: 0 7px 18px rgba(44, 44, 44, 0.22);
+}
+
+tooltip label {
+    font-family: "Patrick Hand", "Caveat", sans-serif;
+    font-size: 15px;
+    color: #2c2c2c;
+    padding: 3px 7px;
+}
+
+/* GTK menus opened from the tray inherit the paper palette. */
+menu {
+    background-color: #f4f1ea;
+    border: 2px solid #d8cbb6;
+    padding: 4px;
+}
+
+menuitem {
+    padding: 4px 8px;
+    border-radius: 3px 5px 2px 4px;
+}
+
+menuitem:hover {
+    background-color: rgba(127, 168, 201, 0.28);
+}

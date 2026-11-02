@@ -1,0 +1,109 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "width": 1200,
+  "height": 58,
+  "margin-bottom": 14,
+  "spacing": 0,
+  "fixed-center": true,
+  "exclusive": true,
+  "reload_style_on_change": true,
+  "modules-left": [
+    "custom/paper",
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "tray",
+    "pulseaudio",
+    "network",
+    "battery",
+    "clock",
+    "custom/trash"
+  ],
+  "custom/paper": {
+    "format": "paperr",
+    "tooltip": false
+  },
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate",
+    "all-outputs": true,
+    "sort-by-name": true,
+    "persistent-workspaces": {
+      "*": 5
+    }
+  },
+  "hyprland/window": {
+    "format": "✎  {title}",
+    "max-length": 58,
+    "separate-outputs": true,
+    "tooltip": false
+  },
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10
+  },
+  "pulseaudio": {
+    "format": "♫  {volume}%",
+    "format-muted": "♫  mute",
+    "format-source": "♬  {volume}%",
+    "format-source-muted": "♬  mute",
+    "scroll-step": 5,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "tooltip-format": "speaker · {volume}%\nright click mutes the microphone"
+  },
+  "network": {
+    "format-wifi": "⌁  {essid}",
+    "format-ethernet": "⌁  wired",
+    "format-link": "⌁  linked",
+    "format-disconnected": "⌁  offline",
+    "tooltip-format-wifi": "{essid} · {signalStrength}%\n{ipaddr}/{cidr}",
+    "tooltip-format-ethernet": "ethernet\n{ipaddr}/{cidr}",
+    "tooltip-format-disconnected": "no network",
+    "on-click": "kitty -e nmtui"
+  },
+  "battery": {
+    "interval": 30,
+    "format": "{icon}  {capacity}%",
+    "format-charging": "⚡  {capacity}%",
+    "format-plugged": "⚡  {capacity}%",
+    "format-icons": [
+      "▁",
+      "▂",
+      "▃",
+      "▄",
+      "▅",
+      "▆",
+      "▇",
+      "█"
+    ],
+    "tooltip-format": "{timeTo}\n{power}W",
+    "states": {
+      "warning": 30,
+      "critical": 15
+    }
+  },
+  "clock": {
+    "interval": 30,
+    "format": "☼  {:%H:%M}",
+    "format-alt": "☼  {:%a %d %b · %H:%M}",
+    "tooltip-format": "{:%A, %d %B %Y}\n<tt>{calendar}</tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1
+    }
+  },
+  "custom/trash": {
+    "format": "󰩺",
+    "tooltip": true,
+    "tooltip-format": "the paper bin\nleft: open · right: empty",
+    "on-click": "@HOME@/.config/waybar/scripts/trash.sh",
+    "on-click-right": "@HOME@/.config/waybar/scripts/trash.sh --empty"
+  }
+}

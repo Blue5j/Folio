@@ -1,0 +1,29 @@
+# Backups
+*.bak
+*.bak.*
+*.old
+*.swp
+*~
+
+# Cache / generated files
+cache/
+*.log
+*.tmp
+
+# Wallpaper caches
+hypr/*.png
+hypr/*.jpg
+wallpapers/*.png
+wallpapers/*.jpg
+
+# Eww generated files
+eww/*.json
+
+# Secrets / personal
+*.secret
+.env
+hypr/user-overrides.conf
+
+# OS junk
+.DS_Store
+Thumbs.db

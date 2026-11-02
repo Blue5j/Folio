@@ -1,0 +1,121 @@
+;; ───────────────────────────────────────────────────────────────────────────
+;;  Paperr · eww
+;;  Three scraps taped to the right edge of the screen:
+;;    clock-window   a page from a day planner
+;;    todo-window    a ruled list of little things
+;;    music-window   a hand-written now-playing card
+;;
+;;  setup.sh replaces @HOME@ with the real home directory.
+;; ───────────────────────────────────────────────────────────────────────────
+
+(defpoll clock-time  :interval "1s"  "date '+%H:%M'")
+(defpoll clock-date  :interval "30s" "date '+%A, %d %B'")
+(defpoll clock-year  :interval "1h"  "date '+%Y'")
+(defpoll clock-month :interval "1h"  "date '+%m'")
+(defpoll clock-day   :interval "1h"  "date '+%d'")
+
+(defpoll todos      :interval "2s" :initial "[]" "@HOME@/.config/eww/scripts/todo.sh list")
+(defpoll todo-count :interval "2s" :initial "0" "@HOME@/.config/eww/scripts/todo.sh count")
+
+(defpoll music :interval "1s" "@HOME@/.config/eww/scripts/music.sh")
+
+(defwidget paper-title [eyebrow title]
+  (box :class "card-heading" :orientation "vertical" :space-evenly false
+    (box :class "heading-top" :orientation "horizontal" :space-evenly false
+      (label :class "eyebrow" :text {eyebrow})
+      (label :class "heading-rule" :text "· · · · · · · ·")
+      (label :class "heading-mark" :text "✿"))
+    (label :class "card-title" :text {title})))
+
+(defwidget transport-button [glyph command tip]
+  (button :class "transport" :onclick {command} :tooltip {tip}
+    (label :class "transport-glyph" :text {glyph})))
+
+(defwidget clock-widget []
+  (box :class "paper-card clock-card" :orientation "vertical" :width 300 :halign "center" :space-evenly false
+    (paper-title :eyebrow "today, roughly" :title "the daily page")
+    (box :class "clock-head" :orientation "horizontal" :space-evenly false
+      (label :class "clock-time" :text {clock-time})
+      (box :class "clock-aside" :orientation "vertical"
+        (label :class "clock-date" :text {clock-date})
+        (label :class "clock-mood" :text "make time for tea")))
+    (calendar :class "paper-calendar"
+              :year {clock-year}
+              :month {clock-month}
+              :day {clock-day}
+              :show-heading true
+              :show-day-names true
+              :show-week-numbers false
+              :show-details false)
+    ))
+
+(defwidget todo-widget []
+  (box :class "paper-card todo-card" :orientation "vertical" :width 300 :halign "center" :space-evenly false
+    (paper-title :eyebrow "little things" :title "a working list")
+    (box :class "todo-meta" :orientation "horizontal" :space-evenly false
+      (label :class "todo-count" :text "${todo-count} left")
+      (label :class "todo-hint" :text "press enter to add"))
+    (scroll :class "todo-scroll" :vscroll true :hscroll false :height 112
+      (box :class "todo-list" :orientation "vertical" :space-evenly false
+        (for todo in todos
+          (box :class {todo.done ? "todo-row done" : "todo-row"} :orientation "horizontal" :space-evenly false
+            (button :class "todo-tick" :onclick "@HOME@/.config/eww/scripts/todo.sh toggle ${todo.id}" :tooltip "tick this off"
+              (label :class "tick-glyph" :text {todo.done ? "✓" : "○"}))
+            (label :class "todo-text" :text {todo.text} :truncate true :limit-width 21)
+            (button :class "todo-del" :onclick "@HOME@/.config/eww/scripts/todo.sh del ${todo.id}" :tooltip "tear this out"
+              (label :text "×"))))
+        (label :class "todo-empty" :visible {arraylength(todos) == 0}
+               :text "the page is blank — add a small thing")) )
+    (box :class "todo-add-row" :orientation "horizontal" :space-evenly false
+      (label :class "todo-add-mark" :text "＋")
+      (input :class "todo-input"
+             :onaccept "@HOME@/.config/eww/scripts/todo.sh add {}"))))
+
+(defwidget music-widget []
+  (box :class "paper-card music-card" :orientation "vertical" :width 300 :halign "center" :space-evenly false
+    (box :class "music-top" :orientation "horizontal" :space-evenly false
+      (label :class "music-note" :text "♫")
+      (box :class "music-now" :orientation "vertical"
+        (label :class "music-kicker" :text "on the turntable")
+        (label :class "music-status" :text {music.status}))
+      (label :class "music-stamp" :text "side a"))
+    (label :class "music-title" :text {music.title} :truncate true :limit-width 30)
+    (label :class "music-artist" :text {music.artist} :truncate true :limit-width 34)
+    (box :class "music-progress-row" :orientation "horizontal" :space-evenly false
+      (label :class "music-time" :text {music.position})
+      (progress :class "music-progress" :value {music.percent} :orientation "h")
+      (label :class "music-time" :text {music.length}))
+    (box :class "music-controls" :orientation "horizontal" :space-evenly true
+      (transport-button :glyph "⏮" :command "playerctl previous" :tip "previous")
+      (transport-button :glyph {music.playing ? "⏸" : "▶"} :command "playerctl play-pause" :tip "play / pause")
+      (transport-button :glyph "⏭" :command "playerctl next" :tip "next"))
+    (box :class "music-bottom" :orientation "horizontal" :space-evenly false
+      (label :class "music-album" :text {music.album} :truncate true :limit-width 29)
+      (label :class "music-scribble" :text "with love, from the desk"))))
+
+(defwindow clock-window
+  :monitor 0
+  :geometry (geometry :x "22px" :y "40px" :width "368px" :height "404px" :anchor "top right")
+  :stacking "overlay"
+  :focusable "none"
+  :namespace "eww"
+  (transform :rotate 0.35 :transform-origin-x "50%" :transform-origin-y "50%"
+    (clock-widget)))
+
+(defwindow todo-window
+  :monitor 0
+  :geometry (geometry :x "22px" :y "454px" :width "368px" :height "290px" :anchor "top right")
+  :stacking "overlay"
+  :focusable "ondemand"
+  :namespace "eww"
+  (transform :rotate -0.22 :transform-origin-x "50%" :transform-origin-y "50%"
+    (todo-widget)))
+
+(defwindow music-window
+  :monitor 0
+  :geometry (geometry :x "22px" :y "756px" :width "368px" :height "242px" :anchor "top right")
+  :stacking "overlay"
+  :focusable "none"
+  :namespace "eww"
+  (transform :rotate 0.18 :transform-origin-x "50%" :transform-origin-y "50%"
+    (music-widget)))

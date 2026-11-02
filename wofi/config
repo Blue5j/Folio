@@ -1,0 +1,13 @@
+show=drun
+prompt=find a scrap…
+width=560
+height=430
+location=center
+anchor=center
+allow_markup=true
+no_actions=true
+hide_scroll=true
+image_size=24
+columns=1
+insensitive=true
+term=kitty

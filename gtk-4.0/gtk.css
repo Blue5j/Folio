@@ -1,0 +1,399 @@
+/* ───────────────────────────────────────────────────────────────────────────
+   Paperr · GTK4
+   The same warm sheet and hand-cut edge as the GTK3 theme, using GTK4 CSS
+   nodes.  Applications that draw their own content (browsers, document
+   viewers, games) keep their own canvas; this themes their chrome.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+@define-color paper        #f4f1ea;
+@define-color paper_light  #fbf8f1;
+@define-color paper_dark   #e8dfd0;
+@define-color edge         #d3c6b2;
+@define-color edge_soft    #e2d8c8;
+@define-color ink          #2c2c2c;
+@define-color ink_soft     #5f574d;
+@define-color ink_faint    #8d8171;
+@define-color sky          #7fa8c9;
+@define-color sky_soft     #bcd7e8;
+@define-color brick        #a64e42;
+@define-color apricot      #cc9056;
+@define-color sage         #8b9b7d;
+
+window,
+.background {
+    background-color: @paper;
+    background-image: linear-gradient(135deg, alpha(@paper_light, 0.55), alpha(@paper_dark, 0.30));
+    color: @ink;
+}
+
+window {
+    border: 4px solid @paper_light;
+    border-radius: 3px 7px 4px 6px;
+    box-shadow: 0 1px 0 @edge_soft inset,
+                0 10px 26px alpha(@ink, 0.18);
+}
+
+headerbar,
+.titlebar {
+    background-color: @paper_dark;
+    background-image: linear-gradient(to bottom, @paper_light, @paper_dark);
+    color: @ink;
+    border: none;
+    border-bottom: 2px solid @edge;
+    border-radius: 0;
+    box-shadow: 0 2px 0 alpha(@paper_light, 0.55) inset;
+    min-height: 38px;
+    padding: 2px 8px;
+}
+
+headerbar:backdrop,
+.titlebar:backdrop {
+    background-image: linear-gradient(to bottom, @paper, @paper_dark);
+    color: @ink_faint;
+}
+
+headerbar .title,
+.titlebar .title {
+    font-family: "Caveat", "Patrick Hand", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: @ink;
+}
+
+headerbar button,
+.titlebar button,
+windowcontrols button {
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px 8px 3px 7px;
+    box-shadow: none;
+    color: @ink_soft;
+    padding: 3px 7px;
+    margin: 1px;
+}
+
+headerbar button:hover,
+.titlebar button:hover,
+windowcontrols button:hover {
+    background-color: alpha(@sky_soft, 0.55);
+    border-color: alpha(@sky, 0.65);
+    color: @ink;
+}
+
+button {
+    background-color: @paper_light;
+    background-image: none;
+    border: 2px solid @edge_soft;
+    border-radius: 3px 7px 4px 6px;
+    box-shadow: 0 1px 0 alpha(#ffffff, 0.55) inset;
+    color: @ink;
+    padding: 5px 11px;
+    min-height: 22px;
+}
+
+button:hover {
+    background-color: alpha(@sky_soft, 0.45);
+    border-color: alpha(@sky, 0.75);
+}
+
+button:active,
+button:checked {
+    background-color: alpha(@sky_soft, 0.80);
+    border-color: @sky;
+    box-shadow: none;
+}
+
+button:disabled {
+    background-color: @paper_dark;
+    color: @ink_faint;
+    border-color: @paper_dark;
+}
+
+button.suggested-action {
+    background-color: alpha(@sky, 0.30);
+    border-color: @sky;
+}
+
+button.destructive-action {
+    background-color: alpha(@brick, 0.16);
+    border-color: alpha(@brick, 0.55);
+    color: @brick;
+}
+
+entry,
+spinbutton,
+searchentry {
+    background-color: @paper_light;
+    background-image: none;
+    border: 2px solid @edge_soft;
+    border-radius: 3px 7px 4px 6px;
+    box-shadow: 0 1px 2px alpha(@ink, 0.06) inset;
+    color: @ink;
+    padding: 4px 7px;
+    min-height: 24px;
+}
+
+entry:focus,
+spinbutton:focus,
+searchentry:focus {
+    border-color: @sky;
+    box-shadow: 0 0 0 2px alpha(@sky, 0.18);
+}
+
+entry:disabled,
+spinbutton:disabled {
+    background-color: @paper_dark;
+    color: @ink_faint;
+}
+
+textview,
+textview text,
+.view,
+listview,
+gridview,
+columnview,
+iconview,
+flowbox,
+flowboxchild {
+    background-color: @paper;
+    color: @ink;
+}
+
+textview,
+textview text {
+    background-color: @paper_light;
+}
+
+listview,
+gridview,
+columnview,
+iconview {
+    border: 1px solid @edge_soft;
+    border-radius: 3px 6px 3px 5px;
+}
+
+listview row:selected,
+gridview child:selected,
+columnview row:selected,
+flowboxchild:selected,
+.view:selected {
+    background-color: alpha(@sky_soft, 0.65);
+    color: @ink;
+}
+
+listview row:hover,
+gridview child:hover,
+flowboxchild:hover {
+    background-color: alpha(@sky_soft, 0.28);
+}
+
+.sidebar,
+.navigation-sidebar,
+placessidebar {
+    background-color: @paper_dark;
+    color: @ink;
+    border-right: 1px solid @edge;
+}
+
+.navigation-sidebar row:selected,
+placessidebar row:selected {
+    background-color: alpha(@sky_soft, 0.60);
+    color: @ink;
+    border-radius: 3px 7px 3px 6px;
+}
+
+popover,
+popover.background,
+popover > contents {
+    background-color: @paper;
+    color: @ink;
+    border: 2px solid @edge;
+    border-radius: 4px 8px 3px 7px;
+    box-shadow: 0 8px 22px alpha(@ink, 0.22);
+    padding: 4px;
+}
+
+popover modelbutton,
+popover button.flat {
+    border-radius: 3px 6px 2px 5px;
+    padding: 4px 9px;
+    color: @ink;
+    border: 1px solid transparent;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+popover modelbutton:hover,
+popover button.flat:hover {
+    background-color: alpha(@sky_soft, 0.55);
+    border-color: alpha(@sky_soft, 0.55);
+}
+
+menubar,
+menu {
+    background-color: @paper;
+    color: @ink;
+    border: 1px solid @edge;
+}
+
+menuitem {
+    border-radius: 3px 6px 2px 5px;
+    padding: 4px 9px;
+}
+
+menuitem:hover {
+    background-color: alpha(@sky_soft, 0.55);
+}
+
+tooltip {
+    background-color: @paper;
+    color: @ink;
+    border: 2px solid @edge;
+    border-radius: 4px 7px 3px 6px;
+    box-shadow: 0 5px 14px alpha(@ink, 0.20);
+    padding: 4px 7px;
+}
+
+tooltip label {
+    color: @ink;
+    font-family: "Patrick Hand", "Caveat", sans-serif;
+}
+
+notebook > header {
+    background-color: @paper_dark;
+    border-bottom: 1px solid @edge;
+}
+
+notebook > header tab {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 5px 12px;
+    color: @ink_soft;
+}
+
+notebook > header tab:hover {
+    background-color: alpha(@sky_soft, 0.28);
+}
+
+notebook > header tab:checked {
+    background-color: @paper;
+    border-bottom-color: @sky;
+    color: @ink;
+}
+
+notebook > stack {
+    background-color: @paper;
+}
+
+scrollbar {
+    background-color: transparent;
+    border: none;
+}
+
+scrollbar trough {
+    background-color: alpha(@edge, 0.32);
+    border-radius: 4px;
+}
+
+scrollbar slider {
+    background-color: alpha(@ink_soft, 0.42);
+    border: 1px solid alpha(@paper_light, 0.55);
+    border-radius: 5px;
+    min-width: 7px;
+    min-height: 24px;
+}
+
+scrollbar slider:hover {
+    background-color: alpha(@sky, 0.75);
+}
+
+separator {
+    background-color: @edge;
+    min-width: 1px;
+    min-height: 1px;
+}
+
+progressbar trough {
+    background-color: alpha(@edge, 0.35);
+    border-radius: 4px;
+    min-height: 7px;
+}
+
+progressbar progress {
+    background-color: @sky;
+    border-radius: 4px;
+    min-height: 7px;
+}
+
+levelbar block.filled {
+    background-color: @sky;
+    border-radius: 3px;
+}
+
+levelbar block.low {
+    background-color: @apricot;
+}
+
+levelbar block.high {
+    background-color: @sage;
+}
+
+switch {
+    background-color: alpha(@edge, 0.60);
+    border: 1px solid @edge;
+    border-radius: 12px;
+}
+
+switch:checked {
+    background-color: alpha(@sky, 0.60);
+    border-color: @sky;
+}
+
+switch slider {
+    background-color: @paper_light;
+    border: 1px solid @edge;
+    border-radius: 10px;
+}
+
+checkbutton check,
+radiobutton radio {
+    background-color: @paper_light;
+    border: 2px solid @edge;
+    color: @ink;
+}
+
+checkbutton check:checked,
+radiobutton radio:checked {
+    background-color: @sky_soft;
+    border-color: @sky;
+}
+
+selection,
+*:selected {
+    background-color: alpha(@sky_soft, 0.72);
+    color: @ink;
+}
+
+/* Nautilus 4x paper details. */
+.nautilus-window .sidebar,
+.nautilus-window placessidebar {
+    background-color: @paper_dark;
+}
+
+.nautilus-window .path-bar button {
+    font-family: "Caveat", "Patrick Hand", sans-serif;
+    font-size: 15px;
+    border: 1px solid transparent;
+}
+
+.nautilus-window .path-bar button:hover {
+    border-color: @edge_soft;
+    background-color: alpha(@sky_soft, 0.25);
+}
+
+.nautilus-window .disk-space {
+    font-family: "Patrick Hand", sans-serif;
+    color: @ink_faint;
+}

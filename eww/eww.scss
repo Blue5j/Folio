@@ -1,0 +1,456 @@
+/* ───────────────────────────────────────────────────────────────────────────
+   Paperr · eww
+   GTK CSS with a little SCSS sugar.  The torn edges, tape and paper grain are
+   baked into the card images; this file handles ink, layout and shadows.
+   setup.sh replaces @HOME@ with your home directory.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+$paper:   #f4f1ea;
+$paper-2: #fbf8f1;
+$ink:     #2c2c2c;
+$muted:   #6e6458;
+$faint:   #9b8f80;
+$blue:    #7fa8c9;
+$red:     #a64e42;
+$orange:  #cc9056;
+$sage:    #8b9b7d;
+$edge:    #d8cbb6;
+
+window {
+    background-color: transparent;
+}
+
+* {
+    font-family: "Patrick Hand", "Caveat", "FiraCode Nerd Font", sans-serif;
+    color: $ink;
+}
+
+.paper-card {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 2px 8px 3px 7px;
+    box-shadow: 0 11px 24px rgba(44, 44, 44, 0.20),
+                0 2px 0 rgba(255, 255, 255, 0.48) inset;
+}
+
+.clock-card {
+    background-image: url("@HOME@/.config/eww/assets/card-clock.png");
+    padding: 36px 20px 10px 22px;
+}
+
+.todo-card {
+    background-image: url("@HOME@/.config/eww/assets/card-todo.png");
+    padding: 34px 18px 8px 19px;
+}
+
+.music-card {
+    background-image: url("@HOME@/.config/eww/assets/card-music.png");
+    padding: 31px 20px 7px 21px;
+}
+
+.card-heading {
+    margin-bottom: 5px;
+}
+
+.heading-top {
+    margin-bottom: 1px;
+}
+
+.eyebrow {
+    font-family: "Patrick Hand", sans-serif;
+    font-size: 12px;
+    color: $red;
+    letter-spacing: 1px;
+}
+
+.heading-rule {
+    font-size: 11px;
+    color: rgba(120, 106, 90, 0.55);
+    margin: 0 6px;
+}
+
+.heading-mark {
+    font-size: 13px;
+    color: $orange;
+}
+
+.card-title {
+    font-family: "Caveat", "Patrick Hand", sans-serif;
+    font-size: 21px;
+    font-weight: 600;
+    color: $ink;
+    margin-top: -2px;
+}
+
+/* ── clock ───────────────────────────────────────────────────────────────── */
+
+.clock-head {
+    margin: 1px 0 1px 0;
+}
+
+.clock-time {
+    font-family: "Caveat", "Patrick Hand", sans-serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: $ink;
+    margin-right: 11px;
+}
+
+.clock-aside {
+    margin-top: 9px;
+}
+
+.clock-date {
+    font-family: "Caveat", sans-serif;
+    font-size: 16px;
+    color: $muted;
+}
+
+.clock-mood {
+    font-family: "Patrick Hand", sans-serif;
+    font-size: 12px;
+    color: $red;
+    margin-top: 1px;
+}
+
+.paper-calendar {
+    background-color: transparent;
+    border: none;
+    margin: 4px -10px 0 -10px;
+    padding: 0;
+    font-family: "Patrick Hand", sans-serif;
+    font-size: 12px;
+    color: $ink;
+}
+
+.paper-calendar header {
+    background-color: transparent;
+    border: none;
+    color: $red;
+    font-family: "Caveat", sans-serif;
+    font-size: 17px;
+    padding: 0;
+}
+
+.paper-calendar button {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0 5px;
+    color: $red;
+}
+
+.paper-calendar button:hover {
+    background-color: rgba(166, 78, 66, 0.12);
+    border-radius: 4px;
+}
+
+.paper-calendar:selected {
+    background-color: rgba(127, 168, 201, 0.60);
+    color: $ink;
+    border-radius: 50%;
+}
+
+.paper-calendar.highlight {
+    color: $red;
+    font-weight: bold;
+}
+
+.paper-calendar:indeterminate {
+    color: rgba(110, 100, 88, 0.45);
+}
+
+.paper-calendar:disabled {
+    color: rgba(110, 100, 88, 0.35);
+}
+
+.card-footer {
+    margin-top: 6px;
+    padding-top: 4px;
+    border-top: 1px dashed rgba(110, 100, 88, 0.22);
+}
+
+.footer-note {
+    font-family: "Caveat", sans-serif;
+    font-size: 14px;
+    color: $muted;
+}
+
+.footer-doodle {
+    font-size: 14px;
+    color: $orange;
+    margin-left: 12px;
+}
+
+/* ── todo ────────────────────────────────────────────────────────────────── */
+
+.todo-meta {
+    margin: 1px 0 2px 0;
+}
+
+.todo-count {
+    font-family: "Caveat", sans-serif;
+    font-size: 15px;
+    color: $red;
+}
+
+.todo-hint {
+    font-size: 10px;
+    color: $faint;
+    margin-left: 10px;
+}
+
+.todo-scroll {
+    margin: 0 -5px;
+    background-color: transparent;
+    border: none;
+}
+
+.todo-list {
+    padding: 0 4px;
+}
+
+.todo-row {
+    min-height: 27px;
+    border-bottom: 1px dashed rgba(127, 168, 201, 0.28);
+    padding: 1px 0;
+}
+
+.todo-row.done {
+    opacity: 0.58;
+}
+
+.todo-tick {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0 7px 0 1px;
+    margin: 0;
+    min-width: 21px;
+}
+
+.todo-tick:hover .tick-glyph {
+    color: $red;
+}
+
+.tick-glyph {
+    font-family: "FiraCode Nerd Font", "Patrick Hand", sans-serif;
+    font-size: 17px;
+    color: $blue;
+}
+
+.todo-row.done .tick-glyph {
+    color: $sage;
+}
+
+.todo-text {
+    font-family: "Patrick Hand", sans-serif;
+    font-size: 16px;
+    color: $ink;
+    margin: 1px 4px 0 0;
+}
+
+.todo-row.done .todo-text {
+    color: $muted;
+}
+
+.todo-del {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0 2px;
+    margin: 0 0 0 2px;
+    opacity: 0.30;
+}
+
+.todo-del:hover {
+    opacity: 1;
+    color: $red;
+}
+
+.todo-del label {
+    font-family: "Caveat", sans-serif;
+    font-size: 19px;
+    color: $red;
+}
+
+.todo-empty {
+    font-family: "Caveat", sans-serif;
+    font-size: 15px;
+    color: $faint;
+    padding: 14px 2px;
+}
+
+.todo-add-row {
+    margin-top: 3px;
+    padding-top: 3px;
+    border-top: 1px dashed rgba(110, 100, 88, 0.25);
+}
+
+.todo-add-mark {
+    font-size: 20px;
+    color: $red;
+    margin: 0 5px 0 1px;
+}
+
+entry.todo-input {
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    border-bottom: 1px solid rgba(110, 100, 88, 0.35);
+    border-radius: 0;
+    box-shadow: none;
+    font-family: "Patrick Hand", sans-serif;
+    font-size: 16px;
+    color: $ink;
+    padding: 1px 2px 2px 2px;
+    min-width: 220px;
+}
+
+entry.todo-input:focus {
+    border-bottom-color: $blue;
+}
+
+/* ── music ───────────────────────────────────────────────────────────────── */
+
+.music-top {
+    margin-bottom: 3px;
+}
+
+.music-note {
+    font-family: "Caveat", sans-serif;
+    font-size: 28px;
+    color: $red;
+    margin: -4px 8px 0 0;
+}
+
+.music-kicker {
+    font-size: 10px;
+    color: $faint;
+    letter-spacing: 1px;
+}
+
+.music-status {
+    font-family: "Caveat", sans-serif;
+    font-size: 14px;
+    color: $muted;
+    margin-top: -2px;
+}
+
+.music-stamp {
+    font-family: "Caveat", sans-serif;
+    font-size: 12px;
+    color: $red;
+    border: 1px solid rgba(166, 78, 66, 0.45);
+    border-radius: 3px 6px 2px 5px;
+    padding: 0 5px;
+    margin-left: 8px;
+}
+
+.music-title {
+    font-family: "Caveat", "Patrick Hand", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: $ink;
+    margin-top: 1px;
+}
+
+.music-artist {
+    font-family: "Patrick Hand", sans-serif;
+    font-size: 14px;
+    color: $muted;
+    margin-top: -3px;
+}
+
+.music-progress-row {
+    margin-top: 7px;
+}
+
+.music-time {
+    font-family: "FiraCode Nerd Font", monospace;
+    font-size: 9px;
+    color: $faint;
+    margin: 0 5px;
+}
+
+.music-progress {
+    min-width: 130px;
+    min-height: 6px;
+}
+
+.music-progress trough {
+    background-color: rgba(110, 100, 88, 0.18);
+    border-radius: 3px;
+    min-height: 6px;
+}
+
+.music-progress progress {
+    background-color: $blue;
+    border-radius: 3px;
+    min-height: 6px;
+}
+
+.music-controls {
+    margin-top: 7px;
+}
+
+.transport {
+    background-color: rgba(255, 255, 255, 0.28);
+    border: 1px solid rgba(110, 100, 88, 0.22);
+    border-radius: 4px 8px 3px 7px;
+    box-shadow: 0 2px 0 rgba(110, 100, 88, 0.10);
+    padding: 1px 9px;
+    margin: 0 2px;
+    min-width: 28px;
+}
+
+.transport:hover {
+    background-color: rgba(127, 168, 201, 0.25);
+    border-color: rgba(127, 168, 201, 0.55);
+}
+
+.transport:active {
+    background-color: rgba(127, 168, 201, 0.55);
+    box-shadow: none;
+}
+
+.transport-glyph {
+    font-family: "FiraCode Nerd Font", sans-serif;
+    font-size: 14px;
+    color: $ink;
+}
+
+.music-bottom {
+    margin-top: 5px;
+    padding-top: 3px;
+    border-top: 1px dashed rgba(110, 100, 88, 0.20);
+}
+
+.music-album {
+    font-family: "Patrick Hand", sans-serif;
+    font-size: 11px;
+    color: $faint;
+}
+
+.music-scribble {
+    font-family: "Caveat", sans-serif;
+    font-size: 12px;
+    color: $red;
+    margin-left: 8px;
+}
+
+/* Tooltips, in case a button has one. */
+tooltip {
+    background-color: $paper;
+    border: 2px solid $edge;
+    border-radius: 4px 7px 3px 6px;
+    box-shadow: 0 5px 12px rgba(44, 44, 44, 0.20);
+}
+
+tooltip label {
+    font-family: "Patrick Hand", sans-serif;
+    font-size: 13px;
+    color: $ink;
+    padding: 2px 5px;
+}
